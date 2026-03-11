@@ -1,0 +1,2349 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>On a à parler 💬</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #080808;
+        --card: #111;
+        --card2: #181818;
+        --accent: #ff6b6b;
+        --accent2: #ffd166;
+        --green: #06d6a0;
+        --blue: #4cc9f0;
+        --text: #f0ebe3;
+        --muted: #666;
+        --border: #222;
+        --r: 20px;
+      }
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "DM Sans", sans-serif;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* ── BG ORBS ── */
+      .bg-orbs {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+      }
+      .orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.1;
+        animation: orbDrift linear infinite;
+      }
+      .orb1 {
+        width: 500px;
+        height: 500px;
+        background: #ff6b6b;
+        top: -100px;
+        left: -150px;
+        animation-duration: 18s;
+      }
+      .orb2 {
+        width: 400px;
+        height: 400px;
+        background: #ffd166;
+        bottom: -100px;
+        right: -100px;
+        animation-duration: 22s;
+        animation-delay: -8s;
+      }
+      .orb3 {
+        width: 300px;
+        height: 300px;
+        background: #06d6a0;
+        top: 40%;
+        left: 60%;
+        animation-duration: 15s;
+        animation-delay: -4s;
+      }
+      @keyframes orbDrift {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+        25% {
+          transform: translate(30px, -20px) scale(1.05);
+        }
+        50% {
+          transform: translate(-20px, 30px) scale(0.95);
+        }
+        75% {
+          transform: translate(20px, 20px) scale(1.03);
+        }
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        opacity: 0.025;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      /* ── KEYFRAMES ── */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        20% {
+          transform: translateX(-8px);
+        }
+        40% {
+          transform: translateX(8px);
+        }
+        60% {
+          transform: translateX(-5px);
+        }
+        80% {
+          transform: translateX(5px);
+        }
+      }
+      @keyframes heartbeat {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        14% {
+          transform: scale(1.12);
+        }
+        28% {
+          transform: scale(1);
+        }
+        42% {
+          transform: scale(1.08);
+        }
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) rotate(-2deg);
+        }
+        50% {
+          transform: translateY(-14px) rotate(2deg);
+        }
+      }
+      @keyframes spinPop {
+        0% {
+          transform: scale(0) rotate(-30deg);
+          opacity: 0;
+        }
+        70% {
+          transform: scale(1.1) rotate(5deg);
+        }
+        100% {
+          transform: scale(1) rotate(0);
+          opacity: 1;
+        }
+      }
+      @keyframes slideLeft {
+        from {
+          opacity: 0;
+          transform: translateX(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      @keyframes confettiFall {
+        from {
+          transform: translateY(-20px) rotate(0deg);
+          opacity: 1;
+        }
+        to {
+          transform: translateY(110vh) rotate(720deg);
+          opacity: 0;
+        }
+      }
+      @keyframes progressGlow {
+        0%,
+        100% {
+          box-shadow: 0 0 6px rgba(255, 107, 107, 0.4);
+        }
+        50% {
+          box-shadow:
+            0 0 16px rgba(255, 107, 107, 0.8),
+            0 0 30px rgba(255, 209, 102, 0.3);
+        }
+      }
+      @keyframes ripple {
+        0% {
+          transform: scale(0);
+          opacity: 0.6;
+        }
+        100% {
+          transform: scale(4);
+          opacity: 0;
+        }
+      }
+      @keyframes bounceIn {
+        0% {
+          transform: scale(0.6);
+          opacity: 0;
+        }
+        60% {
+          transform: scale(1.06);
+        }
+        80% {
+          transform: scale(0.97);
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+      @keyframes slideRight {
+        from {
+          transform: translateX(-100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+      @keyframes spin {
+        from {
+          transform: rotate(0);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* ══════════ QUIZ PAGES ══════════ */
+      #app-quiz {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+      .page {
+        width: 100%;
+        max-width: 560px;
+        padding: 4px 0;
+      }
+
+      /* card */
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        padding: 38px 34px;
+        position: relative;
+        overflow: hidden;
+      }
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 107, 107, 0.3),
+          rgba(255, 209, 102, 0.3),
+          transparent
+        );
+        animation: gradientShift 4s ease infinite;
+        background-size: 200% 200%;
+      }
+
+      /* logo */
+      .logo {
+        text-align: center;
+        margin-bottom: 36px;
+      }
+      .emoji-wrap {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 18px;
+      }
+      .logo .emoji {
+        font-size: 58px;
+        display: block;
+        animation: heartbeat 2.4s ease-in-out infinite;
+        filter: drop-shadow(0 0 20px rgba(255, 107, 107, 0.4));
+      }
+      .emoji-ring {
+        position: absolute;
+        inset: -8px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(255, 107, 107, 0.2);
+        animation: ripple 2.4s ease-out infinite;
+      }
+      .logo h1 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(26px, 6vw, 36px);
+        line-height: 1.18;
+        animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+      }
+      .logo h1 span {
+        background: linear-gradient(135deg, var(--accent), var(--accent2));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        background-size: 200%;
+        animation: gradientShift 3s ease infinite;
+      }
+      .logo p {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 14px;
+        animation: fadeUp 0.6s ease 0.4s both;
+      }
+
+      label {
+        display: block;
+        font-size: 11px;
+        color: var(--muted);
+        margin-bottom: 8px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .input-wrap {
+        position: relative;
+      }
+      .input-wrap .input-icon {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 16px;
+        pointer-events: none;
+      }
+      input[type="password"] {
+        width: 100%;
+        background: #161616;
+        border: 1.5px solid var(--border);
+        border-radius: 12px;
+        padding: 14px 16px 14px 44px;
+        color: var(--text);
+        font-family: "DM Sans", sans-serif;
+        font-size: 16px;
+        letter-spacing: 4px;
+        transition:
+          border-color 0.25s,
+          box-shadow 0.25s,
+          background 0.25s;
+        outline: none;
+      }
+      input[type="password"]:focus {
+        border-color: var(--accent);
+        background: #1a1010;
+        box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+      }
+      input[type="password"].wrong {
+        animation: shake 0.4s ease;
+        border-color: var(--accent);
+      }
+
+      .btn-login {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        margin-top: 16px;
+        padding: 15px;
+        background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+        color: #fff;
+        font-family: "DM Sans", sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition:
+          transform 0.18s,
+          box-shadow 0.18s;
+        position: relative;
+        overflow: hidden;
+      }
+      .btn-login:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(255, 107, 107, 0.3);
+      }
+      .btn-login:active {
+        transform: scale(0.97);
+      }
+
+      .login-error {
+        display: none;
+        color: var(--accent);
+        font-size: 13px;
+        text-align: center;
+        margin-top: 12px;
+        padding: 10px;
+        background: rgba(255, 107, 107, 0.08);
+        border-radius: 8px;
+        border: 1px solid rgba(255, 107, 107, 0.2);
+      }
+      .mdp-hint {
+        margin-top: 14px;
+        font-size: 12px;
+        color: #3a3a3a;
+        text-align: center;
+      }
+
+      .page-footer {
+        text-align: center;
+        margin-top: 22px;
+      }
+      .page-footer a {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        color: #555;
+        text-decoration: none;
+        letter-spacing: 0.04em;
+        padding: 8px 16px;
+        border: 1px solid #2a2a2a;
+        border-radius: 99px;
+        background: rgba(255, 255, 255, 0.02);
+        transition:
+          color 0.25s,
+          border-color 0.25s;
+      }
+      .page-footer a:hover {
+        color: #aaa;
+        border-color: #444;
+      }
+
+      /* progress */
+      #quiz-page {
+        display: none;
+      }
+      .progress-area {
+        margin-bottom: 28px;
+      }
+      .progress-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+      .progress-label,
+      .progress-pct {
+        font-size: 11px;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .progress-track {
+        background: #1a1a1a;
+        border-radius: 99px;
+        height: 6px;
+        overflow: visible;
+        position: relative;
+      }
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--accent), var(--accent2));
+        border-radius: 99px;
+        transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        position: relative;
+        animation: progressGlow 2s ease-in-out infinite;
+      }
+      .progress-fill::after {
+        content: "";
+        position: absolute;
+        right: -3px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 12px;
+        height: 12px;
+        background: var(--accent2);
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(255, 209, 102, 0.6);
+      }
+
+      .q-text {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(18px, 4.5vw, 23px);
+        line-height: 1.48;
+        margin-bottom: 26px;
+        animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+      }
+
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .option {
+        padding: 15px 18px;
+        border: 1.5px solid var(--border);
+        border-radius: 14px;
+        cursor: pointer;
+        font-size: 14px;
+        text-align: left;
+        background: transparent;
+        color: var(--text);
+        position: relative;
+        overflow: hidden;
+        transition:
+          border-color 0.2s,
+          background 0.2s,
+          transform 0.2s,
+          box-shadow 0.2s;
+        animation: slideLeft 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+      .option:nth-child(1) {
+        animation-delay: 0.15s;
+      }
+      .option:nth-child(2) {
+        animation-delay: 0.25s;
+      }
+      .option:nth-child(3) {
+        animation-delay: 0.35s;
+      }
+      .option::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          circle at var(--mx, 50%) var(--my, 50%),
+          rgba(255, 255, 255, 0.04),
+          transparent 60%
+        );
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .option:hover::before {
+        opacity: 1;
+      }
+      .option:hover {
+        border-color: #3a3a3a;
+        background: #181818;
+        transform: translateX(5px);
+        box-shadow: -4px 0 0 var(--accent);
+      }
+      .option.bad {
+        color: #484848;
+      }
+      .option.bad:hover {
+        color: var(--text);
+        border-color: rgba(255, 107, 107, 0.4);
+        box-shadow: -4px 0 0 var(--accent);
+      }
+      .ripple-el {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.06);
+        transform: scale(0);
+        animation: ripple 0.5s linear;
+        pointer-events: none;
+        width: 60px;
+        height: 60px;
+        margin: -30px;
+      }
+
+      .free-zone {
+        animation: fadeUp 0.5s ease 0.15s both;
+      }
+      textarea {
+        width: 100%;
+        background: #161616;
+        border: 1.5px solid var(--border);
+        border-radius: 12px;
+        padding: 14px 16px;
+        color: var(--text);
+        font-family: "DM Sans", sans-serif;
+        font-size: 14px;
+        line-height: 1.6;
+        resize: vertical;
+        min-height: 100px;
+        outline: none;
+        transition:
+          border-color 0.25s,
+          box-shadow 0.25s;
+      }
+      textarea:focus {
+        border-color: rgba(255, 107, 107, 0.5);
+        box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.08);
+      }
+      .char-count {
+        font-size: 11px;
+        color: var(--muted);
+        text-align: right;
+        margin-top: 6px;
+        margin-bottom: 12px;
+      }
+      .char-count.warn {
+        color: var(--accent2);
+      }
+
+      .btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        margin-top: 4px;
+        padding: 14px;
+        background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+        color: #fff;
+        font-family: "DM Sans", sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition:
+          transform 0.18s,
+          box-shadow 0.18s;
+      }
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(255, 107, 107, 0.25);
+      }
+      .btn:active {
+        transform: scale(0.97);
+      }
+
+      /* error overlay */
+      #error-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 200;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        backdrop-filter: blur(10px);
+        animation: fadeIn 0.2s ease;
+      }
+      #error-overlay.show {
+        display: flex;
+      }
+      .err-card {
+        background: linear-gradient(160deg, #1a1010, #111);
+        border: 1.5px solid rgba(255, 107, 107, 0.4);
+        border-radius: 22px;
+        padding: 44px 32px;
+        text-align: center;
+        max-width: 400px;
+        width: 100%;
+        animation: bounceIn 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+        box-shadow:
+          0 0 60px rgba(255, 107, 107, 0.12),
+          0 30px 60px rgba(0, 0, 0, 0.5);
+      }
+      .err-emoji {
+        font-size: 58px;
+        display: block;
+        margin-bottom: 14px;
+        animation: spinPop 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .err-title {
+        font-family: "Playfair Display", serif;
+        font-size: 22px;
+        color: var(--accent);
+        margin-bottom: 12px;
+        animation: fadeUp 0.4s ease 0.15s both;
+      }
+      .err-msg {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.7;
+        margin-bottom: 28px;
+        animation: fadeUp 0.4s ease 0.2s both;
+      }
+      .err-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 12px 28px;
+        background: transparent;
+        border: 1.5px solid rgba(255, 107, 107, 0.5);
+        color: var(--accent);
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 13px;
+        font-family: "DM Sans", sans-serif;
+        font-weight: 500;
+        transition:
+          background 0.2s,
+          color 0.2s,
+          transform 0.15s;
+      }
+      .err-btn:hover {
+        background: var(--accent);
+        color: #fff;
+        transform: translateY(-1px);
+      }
+
+      /* ending */
+      #ending-page {
+        display: none;
+      }
+      .ending-card {
+        text-align: center;
+        background: linear-gradient(160deg, #131313, #0e0e0e);
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        padding: 48px 34px;
+        position: relative;
+        overflow: hidden;
+      }
+      .ending-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse at 50% 0%,
+          rgba(255, 209, 102, 0.05),
+          transparent 55%
+        );
+      }
+      .ending-emoji {
+        font-size: 72px;
+        display: block;
+        margin-bottom: 20px;
+        animation: float 3.5s ease-in-out infinite;
+        filter: drop-shadow(0 8px 20px rgba(255, 107, 107, 0.3));
+      }
+      .ending-card h2 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(22px, 5.5vw, 30px);
+        line-height: 1.3;
+        margin-bottom: 18px;
+        animation: fadeUp 0.7s ease 0.1s both;
+      }
+      .ending-card h2 .hl {
+        background: linear-gradient(135deg, var(--accent2), #ff8e53);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .ending-card p {
+        color: var(--muted);
+        line-height: 1.8;
+        font-size: 14px;
+        margin-bottom: 12px;
+        animation: fadeUp 0.6s ease both;
+      }
+      .ending-card p:nth-child(3) {
+        animation-delay: 0.15s;
+      }
+      .ending-card p:nth-child(4) {
+        animation-delay: 0.25s;
+      }
+      .love-msg {
+        color: var(--accent2) !important;
+        font-weight: 600 !important;
+        font-size: 17px !important;
+        margin-top: 22px !important;
+        animation-delay: 0.4s !important;
+      }
+      .ending-stars {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 20px;
+        animation: fadeUp 0.5s ease 0.5s both;
+      }
+      .ending-stars span {
+        font-size: 20px;
+        animation: heartbeat 1.5s ease-in-out infinite;
+      }
+      .ending-stars span:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .ending-stars span:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+
+      .btn-quit {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 28px;
+        padding: 13px 32px;
+        background: transparent;
+        border: 1.5px solid #333;
+        color: #666;
+        border-radius: 99px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition:
+          border-color 0.25s,
+          color 0.25s,
+          background 0.25s,
+          transform 0.15s;
+        animation: fadeUp 0.6s ease 0.6s both;
+      }
+      .btn-quit:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+        background: rgba(255, 107, 107, 0.06);
+        transform: translateY(-1px);
+      }
+
+      .confetti-wrap {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 300;
+      }
+      .confetti-piece {
+        position: absolute;
+        animation: confettiFall linear both;
+      }
+
+      /* ══════════ ADMIN PANEL ══════════ */
+      #app-admin {
+        display: none;
+        min-height: 100vh;
+        position: relative;
+        z-index: 2;
+      }
+
+      /* admin login */
+      #admin-login {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+      #admin-login .inner {
+        width: 100%;
+        max-width: 400px;
+        animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+      #admin-login .al-icon {
+        font-size: 48px;
+        text-align: center;
+        display: block;
+        margin-bottom: 20px;
+      }
+      #admin-login h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 28px;
+        text-align: center;
+        margin-bottom: 6px;
+      }
+      #admin-login .al-sub {
+        color: var(--muted);
+        font-size: 13px;
+        text-align: center;
+        margin-bottom: 28px;
+      }
+      .login-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 32px 28px;
+      }
+      .al-input-row {
+        position: relative;
+      }
+      .al-input-row span {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 15px;
+        pointer-events: none;
+      }
+      input[type="password"].al-input {
+        letter-spacing: 4px;
+        padding-left: 42px;
+      }
+      .btn-admin-login {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        margin-top: 16px;
+        padding: 14px;
+        background: linear-gradient(135deg, #4cc9f0, #4361ee);
+        color: #fff;
+        font-family: "DM Sans", sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition:
+          transform 0.15s,
+          box-shadow 0.15s;
+      }
+      .btn-admin-login:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(76, 201, 240, 0.25);
+      }
+      .admin-login-err {
+        display: none;
+        color: var(--accent);
+        font-size: 12px;
+        text-align: center;
+        margin-top: 10px;
+        padding: 8px;
+        background: rgba(255, 107, 107, 0.07);
+        border-radius: 8px;
+        border: 1px solid rgba(255, 107, 107, 0.15);
+      }
+      .back-link {
+        display: block;
+        text-align: center;
+        margin-top: 16px;
+        font-size: 12px;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.2s;
+        cursor: pointer;
+      }
+      .back-link:hover {
+        color: var(--text);
+      }
+
+      /* sidebar + main */
+      #admin-panel {
+        display: none;
+      }
+      .adm-layout {
+        display: flex;
+        min-height: 100vh;
+      }
+      .sidebar {
+        width: 220px;
+        background: #0c0c0c;
+        border-right: 1px solid var(--border);
+        padding: 28px 20px;
+        display: flex;
+        flex-direction: column;
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        animation: slideRight 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+      .sb-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 36px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--border);
+      }
+      .sb-logo .si {
+        font-size: 24px;
+      }
+      .sb-title {
+        font-family: "Playfair Display", serif;
+        font-size: 16px;
+      }
+      .sb-sub {
+        font-size: 10px;
+        color: var(--muted);
+      }
+      .nav-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        font-size: 13px;
+        color: var(--muted);
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          color 0.2s;
+        margin-bottom: 4px;
+        border: none;
+        background: transparent;
+        font-family: "DM Sans", sans-serif;
+        width: 100%;
+        text-align: left;
+      }
+      .nav-item:hover {
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--text);
+      }
+      .nav-item.active {
+        background: rgba(76, 201, 240, 0.08);
+        color: var(--blue);
+      }
+      .nav-item .ni {
+        font-size: 16px;
+      }
+      .sb-footer {
+        margin-top: auto;
+        padding-top: 20px;
+        border-top: 1px solid var(--border);
+      }
+      .logout-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        font-size: 12px;
+        color: #444;
+        cursor: pointer;
+        transition: color 0.2s;
+        border: none;
+        background: transparent;
+        font-family: "DM Sans", sans-serif;
+        width: 100%;
+      }
+      .logout-btn:hover {
+        color: var(--accent);
+      }
+
+      .adm-main {
+        flex: 1;
+        padding: 36px 40px;
+        overflow-y: auto;
+        animation: fadeIn 0.5s ease;
+      }
+      .main-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 28px;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+      .main-header h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 28px;
+        margin-bottom: 4px;
+      }
+      .main-header .sub {
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .header-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .action-btn {
+        padding: 9px 18px;
+        border-radius: 9px;
+        font-size: 12px;
+        font-family: "DM Sans", sans-serif;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+        border: 1px solid var(--border);
+        background: transparent;
+        color: var(--muted);
+      }
+      .action-btn:hover {
+        border-color: #444;
+        color: var(--text);
+      }
+      .action-btn.danger:hover {
+        border-color: rgba(255, 107, 107, 0.5);
+        color: var(--accent);
+        background: rgba(255, 107, 107, 0.05);
+      }
+      .action-btn.primary {
+        background: linear-gradient(
+          135deg,
+          rgba(76, 201, 240, 0.15),
+          rgba(67, 97, 238, 0.15)
+        );
+        border-color: rgba(76, 201, 240, 0.3);
+        color: var(--blue);
+      }
+      .action-btn.primary:hover {
+        background: linear-gradient(
+          135deg,
+          rgba(76, 201, 240, 0.22),
+          rgba(67, 97, 238, 0.22)
+        );
+      }
+
+      /* stats */
+      .stats-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 14px;
+        margin-bottom: 28px;
+      }
+      .stat-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 20px 22px;
+        animation: fadeUp 0.5s ease both;
+      }
+      .stat-card:nth-child(1) {
+        animation-delay: 0.05s;
+      }
+      .stat-card:nth-child(2) {
+        animation-delay: 0.1s;
+      }
+      .stat-card:nth-child(3) {
+        animation-delay: 0.15s;
+      }
+      .stat-card:nth-child(4) {
+        animation-delay: 0.2s;
+      }
+      .stat-label {
+        font-size: 11px;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 10px;
+      }
+      .stat-value {
+        font-family: "Playfair Display", serif;
+        font-size: 32px;
+        line-height: 1;
+      }
+      .stat-value.accent {
+        color: var(--accent);
+      }
+      .stat-value.green {
+        color: var(--green);
+      }
+      .stat-value.accent2 {
+        color: var(--accent2);
+      }
+      .stat-value.blue {
+        color: var(--blue);
+      }
+      .stat-sub {
+        font-size: 11px;
+        color: var(--muted);
+        margin-top: 6px;
+      }
+
+      /* sessions */
+      .section-title {
+        font-size: 12px;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .section-title::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+      .session-block {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        margin-bottom: 16px;
+        overflow: hidden;
+        animation: fadeUp 0.5s ease both;
+      }
+      .session-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 18px 22px;
+        border-bottom: 1px solid var(--border);
+        cursor: pointer;
+        transition: background 0.2s;
+        user-select: none;
+      }
+      .session-top:hover {
+        background: rgba(255, 255, 255, 0.02);
+      }
+      .session-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .session-badge {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: linear-gradient(
+          135deg,
+          rgba(76, 201, 240, 0.2),
+          rgba(67, 97, 238, 0.2)
+        );
+        border: 1px solid rgba(76, 201, 240, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+      }
+      .session-title {
+        font-size: 14px;
+        font-weight: 500;
+      }
+      .session-date {
+        font-size: 11px;
+        color: var(--muted);
+        margin-top: 2px;
+        font-family: "DM Mono", monospace;
+      }
+      .session-arrow {
+        color: var(--muted);
+        transition: transform 0.3s;
+        font-size: 12px;
+      }
+      .session-arrow.open {
+        transform: rotate(180deg);
+      }
+      .session-body {
+        display: none;
+        padding: 20px 22px;
+      }
+      .session-body.open {
+        display: block;
+        animation: fadeUp 0.3s ease;
+      }
+      .resp-item {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 14px;
+        padding: 14px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      }
+      .resp-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+      .resp-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 9px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+      .resp-icon.free {
+        background: rgba(255, 107, 107, 0.1);
+      }
+      .resp-icon.good {
+        background: rgba(6, 214, 160, 0.1);
+      }
+      .resp-icon.warn {
+        background: rgba(255, 209, 102, 0.1);
+      }
+      .resp-q {
+        font-size: 11px;
+        color: var(--muted);
+        margin-bottom: 5px;
+        line-height: 1.4;
+      }
+      .resp-a {
+        font-size: 13px;
+        color: var(--text);
+        line-height: 1.55;
+      }
+      .resp-a.italic {
+        font-style: italic;
+        color: #999;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 2px 9px;
+        border-radius: 99px;
+        font-size: 10px;
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+      .badge.good {
+        background: rgba(6, 214, 160, 0.1);
+        color: var(--green);
+        border: 1px solid rgba(6, 214, 160, 0.2);
+      }
+      .badge.warn {
+        background: rgba(255, 209, 102, 0.08);
+        color: var(--accent2);
+        border: 1px solid rgba(255, 209, 102, 0.15);
+      }
+      .badge.free {
+        background: rgba(255, 107, 107, 0.08);
+        color: var(--accent);
+        border: 1px solid rgba(255, 107, 107, 0.15);
+      }
+
+      .empty {
+        text-align: center;
+        padding: 64px 20px;
+      }
+      .empty .big {
+        font-size: 56px;
+        margin-bottom: 16px;
+      }
+      .empty h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 22px;
+        margin-bottom: 8px;
+      }
+      .empty p {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .toast {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 999;
+        background: var(--card2);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 14px 18px;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        animation: fadeUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+
+      /* loading spinner */
+      .spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        border-top-color: var(--blue);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+        margin-right: 8px;
+      }
+
+      @media (max-width: 700px) {
+        .sidebar {
+          width: 100%;
+          height: auto;
+          position: relative;
+          flex-direction: row;
+          padding: 12px 16px;
+          gap: 4px;
+          overflow-x: auto;
+          border-right: none;
+          border-bottom: 1px solid var(--border);
+        }
+        .sb-logo,
+        .sb-footer {
+          display: none;
+        }
+        .nav-item {
+          flex-direction: column;
+          gap: 2px;
+          font-size: 10px;
+          padding: 8px 12px;
+          min-width: 80px;
+        }
+        .adm-main {
+          padding: 20px 16px;
+        }
+      }
+      @media (max-width: 480px) {
+        .card,
+        .ending-card {
+          padding: 28px 20px;
+        }
+        .err-card {
+          padding: 36px 22px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg-orbs">
+      <div class="orb orb1"></div>
+      <div class="orb orb2"></div>
+      <div class="orb orb3"></div>
+    </div>
+
+    <!-- ══════════════ QUIZ APP ══════════════ -->
+    <div id="app-quiz">
+      <!-- LOGIN -->
+      <div
+        class="page"
+        id="login-page"
+        style="animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both"
+      >
+        <div class="logo">
+          <div class="emoji-wrap">
+            <span class="emoji">💌</span>
+            <div class="emoji-ring"></div>
+          </div>
+          <h1>On a des choses<br /><span>à se dire.</span></h1>
+          <p>Entre le mot de passe pour commencer 👇</p>
+        </div>
+        <div class="card">
+          <label for="pwd">Mot de passe</label>
+          <div class="input-wrap">
+            <span class="input-icon">🔑</span>
+            <input
+              type="password"
+              id="pwd"
+              placeholder="••••••••"
+              autocomplete="off"
+            />
+          </div>
+          <button class="btn-login" onclick="tryLogin()">
+            <span>Entrer</span><span>✨</span>
+          </button>
+          <p class="login-error" id="login-error">
+            ❌ Mauvais mot de passe, essaie encore 😅
+          </p>
+          <p class="mdp-hint">
+            Indice : c'est ce que tu devrais avoir pour moi 😏
+          </p>
+        </div>
+        <div class="page-footer">
+          <a href="#admin">🛡️ Accès admin</a>
+        </div>
+      </div>
+
+      <!-- QUIZ -->
+      <div class="page" id="quiz-page">
+        <div class="progress-area">
+          <div class="progress-info">
+            <span class="progress-label" id="q-meta">Question 1 / 9</span>
+            <span class="progress-pct" id="q-pct">0%</span>
+          </div>
+          <div class="progress-track">
+            <div
+              class="progress-fill"
+              id="progress-fill"
+              style="width: 0%"
+            ></div>
+          </div>
+        </div>
+        <div class="card" id="quiz-card">
+          <p class="q-text" id="q-text"></p>
+          <div id="q-body"></div>
+        </div>
+      </div>
+
+      <!-- ENDING -->
+      <div class="page" id="ending-page">
+        <div class="ending-card">
+          <span class="ending-emoji">🌹</span>
+          <h2>
+            Merci d'avoir joué le jeu <span class="hl">honnêtement.</span>
+          </h2>
+          <p>
+            Tu vois ? C'était pas si compliqué. La confiance, c'est pas un luxe
+            — c'est la base de tout.
+          </p>
+          <p>
+            Cette fille, c'est une amie et rien de plus. Ce qui compte, c'est
+            toi et moi. Alors construisons quelque chose de solide, sans
+            conditions et sans ultimatums.
+          </p>
+          <p class="love-msg">Je t'aime. 💛</p>
+          <div class="ending-stars">
+            <span>⭐</span><span>💖</span><span>⭐</span>
+          </div>
+          <button class="btn-quit" onclick="quitSite()">Fermer 👋</button>
+        </div>
+      </div>
+
+      <!-- ERROR OVERLAY -->
+      <div id="error-overlay">
+        <div class="err-card">
+          <span class="err-emoji" id="err-emoji">🚫</span>
+          <p class="err-title" id="err-title">Erreur critique !</p>
+          <p class="err-msg" id="err-msg"></p>
+          <button class="err-btn" onclick="closeError()">
+            <span>😩</span><span>OK ok, j'essaie encore</span>
+          </button>
+        </div>
+      </div>
+      <div class="confetti-wrap" id="confetti-wrap"></div>
+    </div>
+
+    <!-- ══════════════ ADMIN APP ══════════════ -->
+    <div id="app-admin">
+      <!-- ADMIN LOGIN -->
+      <div id="admin-login">
+        <div class="inner">
+          <span class="al-icon">🛡️</span>
+          <h2>Panel Admin</h2>
+          <p class="al-sub">Accès réservé. Entre le mot de passe admin.</p>
+          <div class="login-card">
+            <label for="apwd">Mot de passe admin</label>
+            <div class="al-input-row">
+              <span>🔐</span>
+              <input
+                type="password"
+                id="apwd"
+                class="al-input"
+                placeholder="••••••••"
+                autocomplete="off"
+              />
+            </div>
+            <button class="btn-admin-login" onclick="adminLogin()">
+              <span>Accéder</span><span>→</span>
+            </button>
+            <p class="admin-login-err" id="a-err">❌ Mot de passe incorrect</p>
+          </div>
+          <span class="back-link" onclick="goHome()">← Retour au quiz</span>
+        </div>
+      </div>
+
+      <!-- ADMIN PANEL -->
+      <div id="admin-panel">
+        <div class="adm-layout">
+          <aside class="sidebar">
+            <div class="sb-logo">
+              <span class="si">🛡️</span>
+              <div>
+                <div class="sb-title">Admin</div>
+                <div class="sb-sub">Panel de contrôle</div>
+              </div>
+            </div>
+            <button class="nav-item active" onclick="switchTab('responses')">
+              <span class="ni">📋</span>Réponses
+            </button>
+            <button class="nav-item" onclick="switchTab('stats')">
+              <span class="ni">📊</span>Stats
+            </button>
+            <div class="sb-footer">
+              <button class="logout-btn" onclick="adminLogout()">
+                <span>🚪</span>Déconnexion
+              </button>
+            </div>
+          </aside>
+          <main class="adm-main">
+            <div id="tab-responses">
+              <div class="main-header">
+                <div>
+                  <h1>Réponses</h1>
+                  <p class="sub">Toutes les soumissions du quiz</p>
+                </div>
+                <div class="header-actions">
+                  <button
+                    class="action-btn primary"
+                    onclick="loadAndRenderResponses()"
+                  >
+                    🔄 Rafraîchir
+                  </button>
+                  <button class="action-btn danger" onclick="clearAll()">
+                    🗑️ Effacer tout
+                  </button>
+                </div>
+              </div>
+              <div id="responses-content"></div>
+            </div>
+            <div id="tab-stats" style="display: none">
+              <div class="main-header">
+                <div>
+                  <h1>Statistiques</h1>
+                  <p class="sub">Analyse des réponses</p>
+                </div>
+              </div>
+              <div id="stats-content"></div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /* ══ CONFIG ══ */
+      const PWD_USER = "confiance";
+      const PWD_ADMIN = "admin2024";
+
+      /* ── JSONBin config ──
+   INSTRUCTIONS pour activer le vrai stockage cross-device :
+   1. Va sur https://jsonbin.io et crée un compte gratuit
+   2. Crée un nouveau Bin avec le contenu : []
+   3. Copie ton BIN_ID et ta Master Key
+   4. Remplace les valeurs ci-dessous
+   En attendant, le site utilise localStorage comme fallback.
+*/
+      const JSONBIN_BIN_ID = ""; // ex: "6640abc123def456"
+      const JSONBIN_KEY = ""; // ex: "$2a$10$xxxx"
+
+      /* ══ QUESTIONS ══ */
+      const questions = [
+        {
+          id: "q1",
+          type: "choice",
+          text: "Soyons honnêtes dès le départ. Est-ce que tu as vraiment douté de moi, ou tu as juste paniqué ?",
+          options: [
+            {
+              label: "😔 J'ai paniqué et réagi sans vraiment réfléchir.",
+              good: true,
+            },
+            {
+              label: "😤 Oui j'ai douté, tu semblais trop proche d'elle.",
+              good: false,
+              err: {
+                emoji: "🧐",
+                title: "Hmm… sur quoi tu te bases ?",
+                msg: "Être proche d'une amie ≠ trahison. Si t'avais une vraie preuve, on en parlerait. Mais une impression ça s'appelle de la jalousie. Réessaie.",
+              },
+            },
+            {
+              label: "🙄 J'avais juste envie de créer un drama.",
+              good: false,
+              err: {
+                emoji: "🎭",
+                title: "Drama.exe détecté",
+                msg: "J'ai fait ce site pour qu'on se comprenne vraiment, pas pour un show. Reprends avec honnêteté 💙",
+              },
+            },
+          ],
+        },
+        {
+          id: "q2",
+          type: "free",
+          text: "Qu'est-ce qui t'a concrètement fait réagir comme ça ? (sois honnête, j'ai besoin de comprendre)",
+        },
+        {
+          id: "q3",
+          type: "choice",
+          text: "Est-ce que me demander de 'présenter' une amie comme une condition, c'est quelque chose de normal pour toi ?",
+          options: [
+            {
+              label: "😬 Non… j'avoue que je suis allée un peu trop loin.",
+              good: true,
+            },
+            {
+              label: "😇 Oui, c'est une preuve d'amour.",
+              good: false,
+              err: {
+                emoji: "🔐",
+                title: "Ce n'est pas de l'amour, c'est du contrôle",
+                msg: "L'amour donne de la liberté. Imposer des conditions sur mes amitiés c'est pas sain. Ce bouton est verrouillé 🔒",
+              },
+            },
+            {
+              label: "🤷 Peut-être, mais t'aurais dû comprendre.",
+              good: false,
+              err: {
+                emoji: "😑",
+                title: "Logique introuvable",
+                msg: "Comprendre quoi ? Que tu peux imposer des règles sans que j'aie mon mot à dire ? Non. Réessaie !",
+              },
+            },
+          ],
+        },
+        {
+          id: "q4",
+          type: "choice",
+          text: "Est-ce que j'ai déjà fait quelque chose de concret qui justifie cette méfiance ?",
+          options: [
+            { label: "🤍 Non, honnêtement non.", good: true },
+            {
+              label: "😒 Tu te comportes bizarrement avec elle.",
+              good: false,
+              err: {
+                emoji: "🚨",
+                title: "'Bizarrement' = ?",
+                msg: "C'est vague. Parler à une amie c'est normal. Si t'as des exemples précis, dis-le. Sinon ce bouton reste bloqué.",
+              },
+            },
+            {
+              label: "🙅 Je préfère ne pas répondre.",
+              good: false,
+              err: {
+                emoji: "😶",
+                title: "Silence = pas une réponse",
+                msg: "On est là pour être vrais. Le silence règle rien. Courage ! 💬",
+              },
+            },
+          ],
+        },
+        {
+          id: "q5",
+          type: "free",
+          text: "Si tu pouvais me dire quelque chose que tu n'as pas encore dit, ce serait quoi ?",
+        },
+        {
+          id: "q6",
+          type: "choice",
+          text: "Me manquer de respect en posant des ultimatums, tu en penses quoi maintenant ?",
+          options: [
+            {
+              label: "😔 C'était pas correct de ma part, je le reconnais.",
+              good: true,
+            },
+            {
+              label:
+                "😤 C'était pas un ultimatum, c'était une demande normale.",
+              good: false,
+              err: {
+                emoji: "🤔",
+                title: "Une 'demande' avec pression = un ultimatum",
+                msg: "Quand ça vient avec 'sinon je…', ça devient une menace. C'est ça qui m'a blessé. Réfléchis encore.",
+              },
+            },
+            {
+              label: "🙈 Bof, tout le monde fait ça.",
+              good: false,
+              err: {
+                emoji: "❌",
+                title: "Non, tout le monde ne fait pas ça",
+                msg: "Le manque de respect n'est pas une norme. Moi je mérite mieux. Réessaie.",
+              },
+            },
+          ],
+        },
+        {
+          id: "q7",
+          type: "choice",
+          text: "Le manque de confiance dans une relation, ça vient souvent de quoi selon toi ?",
+          options: [
+            {
+              label: "💭 De ses propres peurs et expériences passées, souvent.",
+              good: true,
+            },
+            {
+              label: "😤 Toujours du comportement de l'autre.",
+              good: false,
+              err: {
+                emoji: "🤔",
+                title: "Toujours ? Vraiment ?",
+                msg: "Parfois oui. Mais projeter ses peurs sur quelqu'un sans raison, c'est un mécanisme de défense, pas la vérité.",
+              },
+            },
+            {
+              label: "🙈 J'sais pas, c'est la vie.",
+              good: false,
+              err: {
+                emoji: "💀",
+                title: "Réponse trop facile",
+                msg: "On est adultes ici. Cette question mérite mieux 😅",
+              },
+            },
+          ],
+        },
+        {
+          id: "q8",
+          type: "free",
+          text: "Comment tu veux qu'on règle ça entre nous concrètement ?",
+        },
+        {
+          id: "q9",
+          type: "choice",
+          text: "Et maintenant qu'on a tout dit… qu'est-ce qu'on fait ?",
+          options: [
+            {
+              label: "🤝 On se parle vraiment, sans conditions ni ultimatums.",
+              good: true,
+            },
+            {
+              label: "😤 Tu gardes tes amis, moi je boude.",
+              good: false,
+              err: {
+                emoji: "😴",
+                title: "Mode bouder : REFUSÉ",
+                msg: "La bouderie résout 0 problème. Une vraie conversation résout tout. Reprends !",
+              },
+            },
+            {
+              label: "🙈 On fait semblant que rien s'est passé.",
+              good: false,
+              err: {
+                emoji: "🌊",
+                title: "L'évitement inonde tout",
+                msg: "Ignorer les problèmes c'est comme ignorer une fuite d'eau. Un jour ça noie tout 💧",
+              },
+            },
+          ],
+        },
+      ];
+
+      /* ══ ROUTING ══ */
+      let current = 0,
+        userAnswers = {};
+
+      function route() {
+        const hash = location.hash;
+        if (hash === "#admin") {
+          document.getElementById("app-quiz").style.display = "none";
+          document.getElementById("app-admin").style.display = "block";
+          document.getElementById("admin-panel").style.display = "none";
+          document.getElementById("admin-login").style.display = "flex";
+        } else {
+          document.getElementById("app-admin").style.display = "none";
+          document.getElementById("app-quiz").style.display = "block";
+        }
+      }
+      window.addEventListener("hashchange", route);
+      window.addEventListener("load", route);
+
+      function goHome() {
+        location.hash = "";
+        route();
+      }
+
+      /* ══ QUIZ LOGIN ══ */
+      function tryLogin() {
+        const val = document.getElementById("pwd").value.trim().toLowerCase();
+        if (val === PWD_USER) {
+          const lp = document.getElementById("login-page");
+          lp.style.transition = "opacity .4s,transform .4s";
+          lp.style.opacity = "0";
+          lp.style.transform = "scale(.96)";
+          setTimeout(() => {
+            lp.style.display = "none";
+            const qp = document.getElementById("quiz-page");
+            qp.style.display = "block";
+            qp.style.animation = "none";
+            void qp.offsetWidth;
+            qp.style.animation = "fadeUp .7s cubic-bezier(.22,1,.36,1) both";
+            renderQuestion();
+          }, 380);
+        } else {
+          const input = document.getElementById("pwd"),
+            err = document.getElementById("login-error");
+          input.classList.remove("wrong");
+          void input.offsetWidth;
+          input.classList.add("wrong");
+          err.style.display = "block";
+          err.style.animation = "none";
+          void err.offsetWidth;
+          err.style.animation = "fadeUp .3s ease";
+          setTimeout(() => input.classList.remove("wrong"), 600);
+        }
+      }
+      document.getElementById("pwd").addEventListener("keydown", (e) => {
+        if (e.key === "Enter") tryLogin();
+      });
+
+      /* mouse shimmer */
+      document.addEventListener("mousemove", (e) => {
+        document.querySelectorAll(".option").forEach((opt) => {
+          const r = opt.getBoundingClientRect();
+          opt.style.setProperty(
+            "--mx",
+            ((e.clientX - r.left) / r.width) * 100 + "%",
+          );
+          opt.style.setProperty(
+            "--my",
+            ((e.clientY - r.top) / r.height) * 100 + "%",
+          );
+        });
+      });
+
+      /* ══ RENDER QUESTION ══ */
+      function renderQuestion() {
+        const q = questions[current],
+          total = questions.length,
+          pct = Math.round((current / total) * 100);
+        document.getElementById("q-meta").textContent =
+          `Question ${current + 1} / ${total}`;
+        document.getElementById("q-pct").textContent = pct + "%";
+        document.getElementById("progress-fill").style.width = pct + "%";
+        document.getElementById("q-text").textContent = q.text;
+        const body = document.getElementById("q-body");
+        body.innerHTML = "";
+
+        if (q.type === "choice") {
+          const optDiv = document.createElement("div");
+          optDiv.className = "options";
+          q.options.forEach((opt) => {
+            const btn = document.createElement("button");
+            btn.className = "option " + (opt.good ? "" : "bad");
+            btn.textContent = opt.label;
+            btn.onclick = (e) => {
+              addRipple(btn, e);
+              if (opt.good) {
+                userAnswers[q.id] = {
+                  type: "choice",
+                  q: q.text,
+                  a: opt.label,
+                  good: true,
+                };
+                btn.style.borderColor = "var(--green)";
+                btn.style.background = "rgba(6,214,160,.08)";
+                setTimeout(() => nextQ(), 300);
+              } else {
+                userAnswers[q.id] = {
+                  type: "choice",
+                  q: q.text,
+                  a: opt.label,
+                  good: false,
+                };
+                btn.style.animation = "shake .4s ease";
+                setTimeout(() => (btn.style.animation = ""), 450);
+                showError(
+                  opt.err || {
+                    emoji: "😅",
+                    title: "Mauvaise réponse !",
+                    msg: "Réessaie !",
+                  },
+                );
+              }
+            };
+            optDiv.appendChild(btn);
+          });
+          body.appendChild(optDiv);
+        } else {
+          const zone = document.createElement("div");
+          zone.className = "free-zone";
+          const ta = document.createElement("textarea");
+          ta.placeholder = "Écris ici en toute honnêteté…";
+          const cc = document.createElement("p");
+          cc.className = "char-count";
+          cc.textContent = "0 / 300";
+          ta.oninput = () => {
+            if (ta.value.length > 300) ta.value = ta.value.slice(0, 300);
+            cc.textContent = ta.value.length + " / 300";
+            cc.className =
+              ta.value.length > 250 ? "char-count warn" : "char-count";
+          };
+          const btn = document.createElement("button");
+          btn.className = "btn";
+          btn.innerHTML = "<span>Continuer</span><span>→</span>";
+          btn.onclick = () => {
+            const val = ta.value.trim();
+            if (!val) {
+              ta.style.borderColor = "var(--accent)";
+              ta.style.animation = "shake .35s ease";
+              void ta.offsetWidth;
+              ta.focus();
+              return;
+            }
+            ta.style.animation = "";
+            userAnswers[q.id] = { type: "free", q: q.text, a: val };
+            nextQ();
+          };
+          zone.appendChild(ta);
+          zone.appendChild(cc);
+          zone.appendChild(btn);
+          body.appendChild(zone);
+        }
+      }
+
+      function addRipple(el, e) {
+        const r = document.createElement("div");
+        r.className = "ripple-el";
+        const rect = el.getBoundingClientRect();
+        r.style.left = e.clientX - rect.left + "px";
+        r.style.top = e.clientY - rect.top + "px";
+        el.appendChild(r);
+        setTimeout(() => r.remove(), 600);
+      }
+
+      function nextQ() {
+        current++;
+        if (current >= questions.length) {
+          saveResponses();
+          showEnding();
+        } else animateNext();
+      }
+
+      function animateNext() {
+        const card = document.getElementById("quiz-card");
+        card.style.transition = "opacity .22s ease,transform .22s ease";
+        card.style.opacity = "0";
+        card.style.transform = "translateX(-24px) scale(.98)";
+        setTimeout(() => {
+          renderQuestion();
+          card.style.transition = "none";
+          card.style.opacity = "0";
+          card.style.transform = "translateX(24px) scale(.98)";
+          void card.offsetWidth;
+          card.style.transition =
+            "opacity .35s cubic-bezier(.22,1,.36,1),transform .35s cubic-bezier(.22,1,.36,1)";
+          card.style.opacity = "1";
+          card.style.transform = "translateX(0) scale(1)";
+        }, 230);
+      }
+
+      function showError(e) {
+        document.getElementById("err-emoji").textContent = e.emoji || "🚫";
+        document.getElementById("err-title").textContent =
+          e.title || "Erreur !";
+        document.getElementById("err-msg").textContent = e.msg || "Réessaie !";
+        document.getElementById("error-overlay").classList.add("show");
+      }
+      function closeError() {
+        document.getElementById("error-overlay").classList.remove("show");
+      }
+
+      function showEnding() {
+        ["login-page", "quiz-page"].forEach(
+          (id) => (document.getElementById(id).style.display = "none"),
+        );
+        const ep = document.getElementById("ending-page");
+        ep.style.display = "block";
+        ep.style.animation = "none";
+        void ep.offsetWidth;
+        ep.style.animation = "fadeUp .8s cubic-bezier(.22,1,.36,1) both";
+        launchConfetti();
+      }
+
+      function quitSite() {
+        window.close();
+        setTimeout(() => {
+          document.getElementById("app-quiz").innerHTML =
+            `<div style="display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:'DM Sans',sans-serif;color:#555;text-align:center;padding:20px;"><div><div style="font-size:52px;margin-bottom:16px">👋</div><p style="font-size:16px;color:#666">Tu peux fermer cet onglet.</p></div></div>`;
+        }, 300);
+      }
+
+      function launchConfetti() {
+        const wrap = document.getElementById("confetti-wrap");
+        const colors = [
+          "#ff6b6b",
+          "#ffd166",
+          "#06d6a0",
+          "#a8dadc",
+          "#fff",
+          "#f4a261",
+          "#c77dff",
+        ];
+        for (let i = 0; i < 110; i++) {
+          const p = document.createElement("div");
+          p.className = "confetti-piece";
+          const s = 6 + Math.random() * 10;
+          p.style.left = Math.random() * 100 + "vw";
+          p.style.background =
+            colors[Math.floor(Math.random() * colors.length)];
+          p.style.width = (Math.random() > 0.5 ? s * 2 : s) + "px";
+          p.style.height = s + "px";
+          p.style.borderRadius = Math.random() > 0.5 ? "50%" : "3px";
+          p.style.animationDuration = 1.2 + Math.random() * 2.6 + "s";
+          p.style.animationDelay = Math.random() * 1.2 + "s";
+          wrap.appendChild(p);
+        }
+        setTimeout(() => (wrap.innerHTML = ""), 5000);
+      }
+
+      /* ══ STORAGE ══ */
+      async function saveResponses() {
+        const entry = {
+          date: new Date().toLocaleString("fr-FR"),
+          answers: userAnswers,
+        };
+        // Try JSONBin first
+        if (JSONBIN_BIN_ID && JSONBIN_KEY) {
+          try {
+            const getRes = await fetch(
+              `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}/latest`,
+              { headers: { "X-Master-Key": JSONBIN_KEY } },
+            );
+            const getData = await getRes.json();
+            const existing = Array.isArray(getData.record)
+              ? getData.record
+              : [];
+            existing.push(entry);
+            await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`, {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+                "X-Master-Key": JSONBIN_KEY,
+              },
+              body: JSON.stringify(existing),
+            });
+            console.log("✅ Sauvegardé sur JSONBin");
+            return;
+          } catch (e) {
+            console.warn("JSONBin error, fallback localStorage", e);
+          }
+        }
+        // Fallback: localStorage
+        try {
+          const ex = JSON.parse(localStorage.getItem("quiz_responses") || "[]");
+          ex.push(entry);
+          localStorage.setItem("quiz_responses", JSON.stringify(ex));
+        } catch (e) {}
+      }
+
+      async function loadResponses() {
+        if (JSONBIN_BIN_ID && JSONBIN_KEY) {
+          try {
+            const r = await fetch(
+              `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}/latest`,
+              { headers: { "X-Master-Key": JSONBIN_KEY } },
+            );
+            const d = await r.json();
+            return Array.isArray(d.record) ? d.record : [];
+          } catch (e) {
+            console.warn("JSONBin load error", e);
+          }
+        }
+        try {
+          return JSON.parse(localStorage.getItem("quiz_responses") || "[]");
+        } catch (e) {
+          return [];
+        }
+      }
+
+      async function clearResponses() {
+        if (JSONBIN_BIN_ID && JSONBIN_KEY) {
+          try {
+            await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`, {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+                "X-Master-Key": JSONBIN_KEY,
+              },
+              body: "[]",
+            });
+          } catch (e) {}
+        }
+        try {
+          localStorage.removeItem("quiz_responses");
+        } catch (e) {}
+      }
+
+      /* ══ ADMIN LOGIN ══ */
+      document.getElementById("apwd").addEventListener("keydown", (e) => {
+        if (e.key === "Enter") adminLogin();
+      });
+
+      function adminLogin() {
+        const val = document.getElementById("apwd").value.trim();
+        if (val === PWD_ADMIN) {
+          const al = document.getElementById("admin-login");
+          al.style.transition = "opacity .4s";
+          al.style.opacity = "0";
+          setTimeout(() => {
+            al.style.display = "none";
+            document.getElementById("admin-panel").style.display = "block";
+            loadAndRenderResponses();
+          }, 380);
+        } else {
+          const err = document.getElementById("a-err");
+          err.style.display = "block";
+          const input = document.getElementById("apwd");
+          input.style.animation = "none";
+          void input.offsetWidth;
+          input.style.animation = "shake .4s ease";
+          setTimeout(() => (input.style.animation = ""), 500);
+        }
+      }
+
+      function adminLogout() {
+        document.getElementById("admin-panel").style.display = "none";
+        const al = document.getElementById("admin-login");
+        al.style.display = "flex";
+        al.style.opacity = "1";
+        document.getElementById("apwd").value = "";
+      }
+
+      /* ══ ADMIN TABS ══ */
+      function switchTab(name) {
+        document
+          .querySelectorAll(".nav-item")
+          .forEach((n, i) =>
+            n.classList.toggle("active", ["responses", "stats"][i] === name),
+          );
+        document.getElementById("tab-responses").style.display =
+          name === "responses" ? "block" : "none";
+        document.getElementById("tab-stats").style.display =
+          name === "stats" ? "block" : "none";
+        if (name === "stats") loadAndRenderStats();
+      }
+
+      /* ══ RENDER RESPONSES ══ */
+      async function loadAndRenderResponses() {
+        const c = document.getElementById("responses-content");
+        c.innerHTML = `<div class="empty"><div style="font-size:40px;animation:spin .8s linear infinite;display:inline-block">⏳</div><p style="margin-top:12px;color:var(--muted)">Chargement des réponses…</p></div>`;
+        const all = await loadResponses();
+        renderResponsesUI(all, c);
+      }
+
+      function renderResponsesUI(all, c) {
+        if (!all.length) {
+          c.innerHTML = `<div class="empty"><div class="big">📭</div><h3>Aucune réponse</h3><p>Elle n'a pas encore complété le quiz.</p></div>`;
+          return;
+        }
+        c.innerHTML = `<p class="section-title">${all.length} session${all.length > 1 ? "s" : ""} enregistrée${all.length > 1 ? "s" : ""}</p>`;
+        all
+          .slice()
+          .reverse()
+          .forEach((session, idx) => {
+            const num = all.length - idx;
+            const block = document.createElement("div");
+            block.className = "session-block";
+            block.style.animationDelay = idx * 0.08 + "s";
+            const top = document.createElement("div");
+            top.className = "session-top";
+            top.innerHTML = `<div class="session-info"><div class="session-badge">${num}</div><div><div class="session-title">Session ${num}</div><div class="session-date">${session.date}</div></div></div><span class="session-arrow ${idx === 0 ? "open" : ""}">▼</span>`;
+            const body = document.createElement("div");
+            body.className = "session-body" + (idx === 0 ? " open" : "");
+            questions.forEach((q) => {
+              const ans = session.answers?.[q.id];
+              if (!ans) return;
+              const item = document.createElement("div");
+              item.className = "resp-item";
+              let ic = "free",
+                ie = "✏️",
+                bh = "";
+              if (ans.type === "choice") {
+                ic = ans.good ? "good" : "warn";
+                ie = ans.good ? "✅" : "⚠️";
+                bh = ans.good
+                  ? '<span class="badge good">✅ Bonne réponse</span>'
+                  : '<span class="badge warn">⚠️ Réponse bloquante</span>';
+              } else bh = '<span class="badge free">✏️ Réponse libre</span>';
+              item.innerHTML = `<div class="resp-icon ${ic}">${ie}</div><div>${bh}<p class="resp-q">${q.text}</p><p class="resp-a ${ans.type === "choice" ? "italic" : ""}">${ans.a}</p></div>`;
+              body.appendChild(item);
+            });
+            top.onclick = () => {
+              const o = body.classList.toggle("open");
+              top.querySelector(".session-arrow").classList.toggle("open", o);
+            };
+            block.appendChild(top);
+            block.appendChild(body);
+            c.appendChild(block);
+          });
+      }
+
+      async function loadAndRenderStats() {
+        const c = document.getElementById("stats-content");
+        const all = await loadResponses();
+        let totalFree = 0,
+          totalGood = 0,
+          totalWarn = 0;
+        all.forEach((s) => {
+          if (!s.answers) return;
+          Object.values(s.answers).forEach((a) => {
+            if (a.type === "free") totalFree++;
+            else if (a.good) totalGood++;
+            else totalWarn++;
+          });
+        });
+        c.innerHTML = `
+    <div class="stats-row">
+      <div class="stat-card"><p class="stat-label">Sessions</p><p class="stat-value blue">${all.length}</p><p class="stat-sub">Fois complété</p></div>
+      <div class="stat-card"><p class="stat-label">Bonnes réponses</p><p class="stat-value green">${totalGood}</p><p class="stat-sub">Sur les QCM</p></div>
+      <div class="stat-card"><p class="stat-label">Bloquantes</p><p class="stat-value accent2">${totalWarn}</p><p class="stat-sub">Tentatives bloquées</p></div>
+      <div class="stat-card"><p class="stat-label">Réponses libres</p><p class="stat-value accent">${totalFree}</p><p class="stat-sub">Textes personnels</p></div>
+    </div>
+    ${all.length === 0 ? `<div class="empty"><div class="big">📊</div><h3>Pas encore de données</h3><p>Les stats apparaîtront après la première soumission.</p></div>` : ""}`;
+      }
+
+      function clearAll() {
+        showConfirm(
+          "🗑️ Effacer tout ?",
+          "Toutes les réponses seront supprimées définitivement.",
+          async () => {
+            await clearResponses();
+            await loadAndRenderResponses();
+            showToast("🗑️ Données effacées");
+          },
+        );
+      }
+
+      function showConfirm(title, msg, onConfirm) {
+        // remove existing
+        const old = document.getElementById("confirm-modal");
+        if (old) old.remove();
+
+        const overlay = document.createElement("div");
+        overlay.id = "confirm-modal";
+        overlay.style.cssText = `position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(8px);animation:fadeIn .2s ease;`;
+
+        overlay.innerHTML = `
+    <div style="background:#161616;border:1.5px solid #333;border-radius:18px;padding:36px 30px;max-width:360px;width:100%;text-align:center;animation:bounceIn .35s cubic-bezier(.22,1,.36,1);">
+      <div style="font-size:44px;margin-bottom:14px">🗑️</div>
+      <p style="font-family:'Playfair Display',serif;font-size:20px;margin-bottom:10px;color:#f0ebe3;">${title}</p>
+      <p style="font-size:13px;color:#666;margin-bottom:28px;line-height:1.6;">${msg}</p>
+      <div style="display:flex;gap:12px;justify-content:center;">
+        <button id="confirm-cancel" style="padding:11px 24px;background:transparent;border:1.5px solid #333;color:#666;border-radius:10px;cursor:pointer;font-size:13px;font-family:'DM Sans',sans-serif;transition:all .2s;">Annuler</button>
+        <button id="confirm-ok" style="padding:11px 24px;background:linear-gradient(135deg,#ff6b6b,#ff4444);border:none;color:#fff;border-radius:10px;cursor:pointer;font-size:13px;font-family:'DM Sans',sans-serif;font-weight:600;transition:all .2s;">Effacer tout</button>
+      </div>
+    </div>`;
+
+        document.body.appendChild(overlay);
+
+        document.getElementById("confirm-cancel").onclick = () =>
+          overlay.remove();
+        overlay.onclick = (e) => {
+          if (e.target === overlay) overlay.remove();
+        };
+        document.getElementById("confirm-ok").onclick = () => {
+          overlay.remove();
+          onConfirm();
+        };
+      }
+
+      function showToast(msg) {
+        const t = document.createElement("div");
+        t.className = "toast";
+        t.textContent = msg;
+        document.body.appendChild(t);
+        setTimeout(() => {
+          t.style.transition = "opacity .3s";
+          t.style.opacity = "0";
+          setTimeout(() => t.remove(), 350);
+        }, 2200);
+      }
+    </script>
+  </body>
+</html>
